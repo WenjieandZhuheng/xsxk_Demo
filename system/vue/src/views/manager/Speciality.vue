@@ -8,7 +8,7 @@
     </div>
 
     <div class="card" style="margin-bottom: 5px">
-      <div style="margin-bottom: 10px">
+      <div style="margin-bottom: 10px" v-if="data.user.role === 'ADMIN'">
         <el-button type="primary" @click="handleAdd">新增</el-button>
       </div>
       <el-table :data="data.tableData" stripe>
