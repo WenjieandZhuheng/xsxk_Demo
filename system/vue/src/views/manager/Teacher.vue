@@ -95,7 +95,7 @@ const data = reactive({
   form: {},
   tableData: [],
   pageNum: 1,
-  pageSize: 4,
+  pageSize: 5,
   total: 0,
   name: null,
   specialityData: []
@@ -107,7 +107,7 @@ const load = () => {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
-      name: data.name
+      name: data.name || ''
     }
   }).then(res =>{
     if (res.code === '200'){
@@ -175,7 +175,7 @@ const save = () => {
 }
 
 const reset = () => {
-  data.name = null
+  data.name = ''
   load()
 }
 

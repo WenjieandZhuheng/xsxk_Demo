@@ -19,7 +19,7 @@ public interface TeacherMapper {
 
     @Select("select teacher.*, speciality.name as specialityName from teacher " +
             "left join speciality on teacher.speciality_id = speciality.id " +
-            "where name like concat('%', #{name}, '%')")
+            "where teacher.name like concat('%', #{name}, '%')")
     List<Teacher> selectByName(String name);
 
     void updateById(Teacher teacher);

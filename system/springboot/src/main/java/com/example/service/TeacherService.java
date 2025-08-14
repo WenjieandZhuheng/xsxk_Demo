@@ -47,8 +47,8 @@ public class TeacherService {
     public PageInfo<Teacher> selectPage(Teacher teacher,Integer pageNum, Integer pageSize) {
         List<Teacher> list;
         PageHelper.startPage(pageNum,pageSize);
-        if (ObjectUtil.isNotEmpty(teacher.getName())){
-            list = teacherMapper.selectByName(teacher.getName());
+        if (ObjectUtil.isNotEmpty(teacher.getName()) && !teacher.getName().trim().isEmpty()){
+            list = teacherMapper.selectByName(teacher.getName().trim());
         }else {
             list = teacherMapper.selectAll();
         }
