@@ -70,5 +70,14 @@ public class ChoiceController {
         return Result.success(list);
     }
 
+    /**
+     * 修复课程已选人数数据
+     */
+    @PostMapping("/fixCourseAlreadyNum")
+    public Result fixCourseAlreadyNum(){
+        choiceService.fixCourseAlreadyNum();
+        return Result.success("课程已选人数数据修复完成");
+    }
+
 
 }

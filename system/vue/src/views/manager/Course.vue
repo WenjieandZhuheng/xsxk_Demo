@@ -8,8 +8,9 @@
     </div>
 
     <div class="card" style="margin-bottom: 5px">
-      <div style="margin-bottom: 10px">
+      <div style="margin-bottom: 10px" v-if="data.user.role === 'ADMIN'">
         <el-button type="primary" @click="handleAdd">新增</el-button>
+        <el-button type="warning" @click="fixCourseAlreadyNum" style="margin-left: 10px">修复选课人数</el-button>
       </div>
       <el-table :data="data.tableData" stripe>
         <el-table-column label="课程名称" prop="name"></el-table-column>
@@ -226,6 +227,27 @@ const choiceCourse = (row) => {
   })
 }
 
+// 修复课程已选人数数据
+const fixCourseAlreadyNum = () => {
+  ElMessageBox.confirm('此操作将重新计算所有课程的已选人数，确定继续吗？', '数据修复确认', {
+    type: 'warning',
+    confirmButtonText: '确定修复',
+    cancelButtonText: '取消'
+  }).then(() => {
+    request.post('/choice/fixCourseAlreadyNum').then(res => {
+      if (res.code === '200') {
+        ElMessage.success('课程已选人数数据修复完成！')
+        load() // 重新加载数据
+      } else {
+        ElMessage.error(res.msg || '修复失败')
+      }
+    }).catch(err => {
+      ElMessage.error('修复过程中发生错误')
+    })
+  }).catch(() => {
+    ElMessage.info('已取消修复操作')
+  })
+}
 
 loadTeacher()
 loadCollege()

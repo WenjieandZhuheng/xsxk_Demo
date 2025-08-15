@@ -31,6 +31,9 @@ public interface ChoiceMapper {
     @Select("select * from choice where course_id = #{courseId} and student_id = #{studentId}")
     List<Choice> selectByCourseIdAndStudentId(@Param("courseId") Integer courseId, @Param("studentId") Integer studentId);
 
+    @Select("select * from choice where course_id = #{courseId}")
+    List<Choice> selectByCourseId(@Param("courseId") Integer courseId);
+
 
     @Select("select choice.*, teacher.name as teacherName, student.name as studentName from choice " +
             "left join teacher on choice.teacher_id = teacher.id " +
